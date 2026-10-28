@@ -1,0 +1,31 @@
+:root { --bg:#f7f8fa; --fg:#1b1f24; --muted:#5b6672; --brand:#0b5fff; --card:#fff; --line:#d9dee5; color-scheme: light dark }
+@media (prefers-color-scheme: dark) { :root { --bg:#111418; --fg:#e8ebef; --muted:#9aa5b1; --brand:#6ea0ff; --card:#1a1f25; --line:#2c343d } }
+* { box-sizing: border-box }
+body { margin:0; font:16px/1.5 system-ui, sans-serif; background:var(--bg); color:var(--fg) }
+header { padding:1rem 1rem 0; max-width:960px; margin:auto }
+header h1 { margin:0 } header p { margin:0 0 .75rem; color:var(--muted) }
+nav { display:flex; flex-wrap:wrap; gap:.4rem }
+nav button { background:var(--card); color:var(--fg); border:1px solid var(--line) }
+nav button.on { background:var(--brand); color:#fff; border-color:var(--brand) }
+.banner { background:#fff3cd; color:#5c4400; text-align:center; padding:.4rem; margin-top:.75rem; font-size:.85rem }
+main { max-width:960px; margin:auto; padding:1rem }
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1rem }
+.card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:1rem; margin:.5rem 0 }
+.card h3,.card h4 { margin-top:0 }
+.muted { color:var(--muted) }
+button { font:inherit; padding:.5rem .9rem; border-radius:6px; border:0; background:var(--brand); color:#fff; cursor:pointer }
+button:disabled { opacity:.5; cursor:not-allowed }
+button.link { background:none; color:var(--muted); text-decoration:underline }
+:focus-visible { outline:3px solid #ffb000; outline-offset:2px }
+label { display:block; margin:.75rem 0 .25rem; font-weight:600 }
+input, select, textarea { display:block; width:100%; margin-top:.25rem; padding:.5rem; font:inherit; color:var(--fg); background:var(--card); border:1px solid var(--line); border-radius:6px }
+fieldset { border:1px solid var(--line); border-radius:8px; margin:1rem 0 }
+.err { color:#c62828; font-size:.9rem; display:block }
+.scroll { overflow-x:auto }
+table { border-collapse:collapse; width:100%; margin:1rem 0; background:var(--card) }
+caption { text-align:left; font-weight:600; padding:.25rem 0 }
+th, td { border:1px solid var(--line); padding:.4rem .6rem; text-align:left }
+.badge { font-size:.75rem; padding:.1rem .5rem; border-radius:99px; font-weight:600; white-space:nowrap }
+.grey { background:#e4e7eb; color:#333 } .amber { background:#ffe8a3; color:#5c4400 }
+.green { background:#c9f0d3; color:#0d4a1f } .blue { background:#d6e4ff; color:#0a2e80 }
+footer { text-align:center; padding:2rem }
