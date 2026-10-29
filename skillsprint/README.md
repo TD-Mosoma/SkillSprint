@@ -6,6 +6,10 @@ A hackathon MVP that tests one practical intervention in the graduate "experienc
 
 > **Demo only.** All companies, datasets, candidates and scores are fictional or illustrative. Nothing here is a real partner or a real assessment result.
 
+## Live deployment
+
+The app is deployed on Vercel: [https://skillsprint-nine-rho.vercel.app](https://skillsprint-nine-rho.vercel.app)
+
 ## What it does
 
 **Role-based demo sign-in**
