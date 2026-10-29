@@ -8,6 +8,11 @@ A hackathon MVP that tests one practical intervention in the graduate "experienc
 
 ## What it does
 
+**Role-based demo sign-in**
+- Start at the sign-in page and choose Graduate or Employee to open the corresponding workspace.
+- Sign-in is only a local demo flow; there are no passwords, real accounts, or server-side authentication.
+- Graduate and employee navigation is separated. All demo data remains in the current browser.
+
 **Graduate journey**
 1. Browse five entry-level IT roles (Business Analyst, Data Analyst, Software Developer, Cybersecurity Analyst, IT Support Analyst).
 2. Open the **Junior Data Analyst** challenge (fictional employer *CapeData Analytics*): read the scenario, synthetic sales data and published rubric before starting.
@@ -49,7 +54,7 @@ npm test           # scoring unit tests
 npm run build      # static build in dist/ (deployable to GitHub Pages, Netlify, Vercel)
 ```
 
-**Suggested 2-minute demo:** Challenge → submit answers → Portfolio → add an entry → My application (*Pending human review*) → Employer view → select your name → rate criteria and save → set status Shortlisted → refresh the page (data persists). Use *Reset demo data* in the footer to start over.
+**Suggested 2-minute demo:** Sign in as a graduate → Challenge → submit answers → Portfolio → add an entry → My application (*Pending human review*) → sign out → sign in as an employee → select a candidate → rate criteria and save → set status Shortlisted. Use *Reset demo data* in the footer to start over.
 
 ## Project structure
 
@@ -67,7 +72,7 @@ The intervention targets one leverage point in the experience-gap cycle: the evi
 
 ## Known limitations
 
-- Single-browser demo: `localStorage` only, no authentication, no shared data between users. The "My application" name is typed, not verified.
+- Single-browser demo: `localStorage` only, no real authentication, no shared data between users. The sign-in role and name are not verified; the "My application" name is typed.
 - Only the Junior Data Analyst role is interactive; the other four are catalogue examples.
 - Free-text answers are not auto-scored; they need human review (by design).
 - Portfolio entries cannot be verified and links are not checked.

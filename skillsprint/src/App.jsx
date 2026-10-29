@@ -158,6 +158,42 @@ function Mine({ state, go }) {
   )
 }
 
+function Login({ onSignIn }) {
+  const [name, setName] = useState('')
+  const [role, setRole] = useState('graduate')
+  const [error, setError] = useState('')
+
+  function submit(e) {
+    e.preventDefault()
+    if (!name.trim()) {
+      setError('Enter your name to continue.')
+      return
+    }
+    onSignIn({ name: name.trim(), role })
+  }
+
+  return (
+    <main className="login-page">
+      <section className="card login-card">
+        <h2>Sign in to SkillSprint</h2>
+        <p className="muted">Choose the workspace that matches your role.</p>
+        <form onSubmit={submit} noValidate>
+          <label htmlFor="login-name">Name</label>
+          <input id="login-name" autoComplete="name" value={name} onChange={(e) => setName(e.target.value)} />
+          <label htmlFor="login-role">I am a</label>
+          <select id="login-role" value={role} onChange={(e) => setRole(e.target.value)}>
+            <option value="graduate">Graduate</option>
+            <option value="employee">Employee</option>
+          </select>
+          {error && <span className="err" role="alert">{error}</span>}
+          <button type="submit">Continue as {role}</button>
+        </form>
+        <p className="muted login-note">Demo sign-in only. No password or real account is required; access is not verified.</p>
+      </section>
+    </main>
+  )
+}
+
 function Employer({ state, setState }) {
   const subs = state.subs
   const [id, setId] = useState(subs[0]?.id)
@@ -213,22 +249,48 @@ function Employer({ state, setState }) {
 export default function App() {
   const [state, setState] = useState(load)
   const [view, setView] = useState('roles')
+  const [session, setSession] = useState(null)
   useEffect(() => { try { localStorage.setItem(KEY, JSON.stringify(state)) } catch { /* storage unavailable: demo still works in-memory */ } }, [state])
-  const tabs = [['roles', 'Opportunities'], ['challenge', 'Challenge'], ['portfolio', 'Portfolio'], ['mine', 'My application'], ['employer', 'Employer view']]
-  const reset = () => { if (confirm('Reset all demo data?')) { setState(fresh()); setView('roles') } }
+  const graduateTabs = [['roles', 'Opportunities'], ['challenge', 'Challenge'], ['portfolio', 'Portfolio'], ['mine', 'My application']]
+  const tabs = session?.role === 'employee' ? [['employer', 'Employee view']] : graduateTabs
+  const signIn = ({ name, role }) => {
+    setSession({ name, role })
+    if (role === 'graduate') {
+      setState((current) => ({ ...current, user: name }))
+      setView('roles')
+    } else {
+      setView('employer')
+    }
+  }
+  const signOut = () => {
+    setSession(null)
+    setView('roles')
+  }
+  const reset = () => { if (confirm('Reset all demo data?')) { setState(fresh()); setView(session?.role === 'employee' ? 'employer' : 'roles') } }
+  if (!session) {
+    return (
+      <>
+        <header><h1>SkillSprint</h1><p>Show your skills. Earn your opportunity.</p></header>
+        <Login onSignIn={signIn} />
+      </>
+    )
+  }
   return (
     <>
       <header>
         <h1>SkillSprint</h1><p>Show your skills. Earn your opportunity.</p>
+        <div className="session-bar">
+          <span className="muted">{session.name} · {session.role === 'employee' ? 'Employee' : 'Graduate'}</span>
+          <button className="link" onClick={signOut}>Sign out</button>
+        </div>
         <nav aria-label="Main">{tabs.map(([k, l]) => <button key={k} className={view === k ? 'on' : ''} aria-current={view === k ? 'page' : undefined} onClick={() => setView(k)}>{l}</button>)}</nav>
       </header>
-      <div className="banner" role="note">Hackathon prototype · fictional companies, synthetic data, sample candidates · stored only in this browser</div>
       <main>
-        {view === 'roles' && <Roles go={setView} />}
-        {view === 'challenge' && <Challenge state={state} setState={setState} go={setView} />}
-        {view === 'portfolio' && <Portfolio state={state} setState={setState} />}
-        {view === 'mine' && <Mine state={state} go={setView} />}
-        {view === 'employer' && <Employer state={state} setState={setState} />}
+        {session.role === 'graduate' && view === 'roles' && <Roles go={setView} />}
+        {session.role === 'graduate' && view === 'challenge' && <Challenge state={state} setState={setState} go={setView} />}
+        {session.role === 'graduate' && view === 'portfolio' && <Portfolio state={state} setState={setState} />}
+        {session.role === 'graduate' && view === 'mine' && <Mine state={state} go={setView} />}
+        {session.role === 'employee' && view === 'employer' && <Employer state={state} setState={setState} />}
       </main>
       <footer><button className="link" onClick={reset}>Reset demo data</button></footer>
     </>
