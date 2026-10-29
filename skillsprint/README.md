@@ -14,7 +14,7 @@ A hackathon MVP that tests one practical intervention in the graduate "experienc
 - Graduate and employee navigation is separated. All demo data remains in the current browser.
 
 **Graduate journey**
-1. Browse five entry-level IT roles (Business Analyst, Data Analyst, Software Developer, Cybersecurity Analyst, IT Support Analyst).
+1. Browse five entry-level IT roles (Business Analyst, Data Analyst, Software Developer, Cybersecurity Analyst, IT Support Analyst), each with an image matched to its role title.
 2. Open the **Junior Data Analyst** challenge (fictional employer *CapeData Analytics*): read the scenario, synthetic sales data and published rubric before starting.
 3. Submit answers and a written analysis (client-side validation).
 4. Add **ProofOfSkill** portfolio entries (title, link, technologies, individual contribution) – always labelled *Self-reported*.

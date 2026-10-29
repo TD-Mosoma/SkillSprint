@@ -1,8 +1,20 @@
 import { useEffect, useState } from 'react'
 import { ROLES, SALES, REGIONS, STATUSES, SEED } from './data.js'
 import { RUBRIC, QUESTIONS, correctness, scoreAccuracy, totalScore } from './scoring.js'
+import businessAnalystImage from './assets/business-analyst.webp'
+import cybersecurityAnalystImage from './assets/CybersecurityAnalyst.webp'
+import dataAnalystImage from './assets/data-analytics.jpg'
+import itSupportAnalystImage from './assets/ITsupport-analyst.jpg'
+import softwareDeveloperImage from './assets/Software-developer.webp'
 
 const KEY = 'skillsprint-v1'
+const ROLE_IMAGES = {
+  'data-analyst': dataAnalystImage,
+  'business-analyst': businessAnalystImage,
+  developer: softwareDeveloperImage,
+  cyber: cybersecurityAnalystImage,
+  'it-support': itSupportAnalystImage,
+}
 const fresh = () => ({ user: '', subs: SEED.subs, ports: SEED.ports })
 function load() {
   try { return JSON.parse(localStorage.getItem(KEY)) || fresh() } catch { return fresh() }
@@ -18,6 +30,7 @@ function Roles({ go }) {
       <div className="grid">
         {ROLES.map((r) => (
           <article key={r.id} className="card">
+            <img className="role-image" src={ROLE_IMAGES[r.id]} alt={`${r.title} role`} />
             <h3>{r.title}</h3>
             <p className="muted">{r.company} · {r.effort}</p>
             <p>{r.summary}</p>
