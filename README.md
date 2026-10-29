@@ -49,7 +49,7 @@ Requires Node.js 18+.
 
 ```bash
 git clone <your-repo-url>
-cd skillsprint
+cd SkillSprint/skillsprint
 npm install
 npm run dev        # http://localhost:5173
 npm test           # scoring unit tests
