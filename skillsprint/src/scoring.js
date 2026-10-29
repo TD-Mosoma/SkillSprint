@@ -1,4 +1,4 @@
-import { SALES, REGIONS } from './data.js'
+import { ROLES, SALES, REGIONS } from './data.js'
 
 export const RUBRIC = [
   { key: 'accuracy',  label: 'Data accuracy and preparation',   weight: 30, mode: 'Calculated (auto-checked)' },
@@ -6,6 +6,11 @@ export const RUBRIC = [
   { key: 'visual',    label: 'Visualisation and interpretation', weight: 20, mode: 'Human review' },
   { key: 'recs',      label: 'Business recommendations',        weight: 20, mode: 'Human review' },
 ]
+
+export function rubricForRole(roleId) {
+  if (roleId === 'data-analyst') return RUBRIC
+  return ROLES.find((role) => role.id === roleId)?.challenge?.rubric || RUBRIC
+}
 
 const sum = (arr) => arr.reduce((a, b) => a + b, 0)
 const regionTotal = (r) => sum(SALES.map((m) => m[r]))
@@ -37,9 +42,10 @@ export function scoreAccuracy(answers) {
 }
 
 // Returns a 0–100 weighted total, or null until every criterion has a score.
-export function totalScore(answers, ratings) {
+export function totalScore(answers, ratings, roleId = 'data-analyst') {
   if (!ratings) return null
-  const vals = { accuracy: scoreAccuracy(answers), ...ratings }
-  if (RUBRIC.some((r) => typeof vals[r.key] !== 'number')) return null
-  return Math.round(sum(RUBRIC.map((r) => (vals[r.key] / 5) * r.weight)) * 10) / 10
+  const rubric = rubricForRole(roleId)
+  const vals = { ...(roleId === 'data-analyst' ? { accuracy: scoreAccuracy(answers) } : {}), ...ratings }
+  if (rubric.some((r) => typeof vals[r.key] !== 'number')) return null
+  return Math.round(sum(rubric.map((r) => (vals[r.key] / 5) * r.weight)) * 10) / 10
 }

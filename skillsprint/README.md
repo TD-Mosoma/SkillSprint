@@ -14,26 +14,25 @@ A hackathon MVP that tests one practical intervention in the graduate "experienc
 - Graduate and employee navigation is separated. All demo data remains in the current browser.
 
 **Graduate journey**
-1. Browse five entry-level IT roles (Business Analyst, Data Analyst, Software Developer, Cybersecurity Analyst, IT Support Analyst), each with an image matched to its role title.
-2. Open the **Junior Data Analyst** challenge (fictional employer *CapeData Analytics*): read the scenario, synthetic sales data and published rubric before starting.
-3. Submit answers and a written analysis (client-side validation).
+1. Browse five entry-level IT roles, each with a matching image and fictional company: Business Analyst at BrightPath Commerce, Data Analyst at CapeData Analytics, Software Developer at Copperleaf Software Studio, Cybersecurity Analyst at Sentinel Ridge Security, and IT Support Analyst at Harborlight IT Services.
+2. Open a role-specific challenge with its scenario, task prompts and published review rubric: process analysis and requirements for Business Analysts, an order-summary function for Software Developers, suspicious-login alert triage for Cybersecurity Analysts, and shared-folder troubleshooting for IT Support Analysts.
+3. Submit written answers (client-side validation); Data Analyst answers are partly auto-checked, while the other roles are assessed by a human reviewer.
 4. Add **ProofOfSkill** portfolio entries (title, link, technologies, individual contribution) – always labelled *Self-reported*.
 5. Track application status and score.
 
 **Employer journey**
-1. Pick a candidate and see the challenge submission with auto-checked answers.
-2. Rate the open-ended criteria (0–5) against the same rubric.
+1. Pick a candidate and role-specific submission; Data Analyst answers include auto-check results.
+2. Rate the role-specific criteria (0–5) against the published rubric.
 3. View portfolio evidence **separately** from the challenge score.
 4. Set status (Under Review / Shortlisted / Interview / Not Progressing) and add notes. The platform never hires or rejects automatically.
 
-**Scoring honesty** – every score is labelled:
+**Scoring honesty** – every score is labelled. Weights apply within a role; percentages across different roles are not combined.
 
-| Criterion | Weight | How scored |
+| Role / criterion | Weight | How scored |
 |---|---|---|
-| Data accuracy and preparation | 30% | **Calculated** – 3 questions auto-checked against an answer key derived from the dataset |
-| Analytical reasoning | 30% | Human review |
-| Visualisation and interpretation | 20% | Human review |
-| Business recommendations | 20% | Human review |
+| Data Analyst: data accuracy and preparation | 30% | **Calculated** – 3 questions auto-checked against an answer key derived from the dataset |
+| Data Analyst: reasoning, visualisation and recommendations | 70% | Human review across the published criteria |
+| Business Analyst, Software Developer, Cybersecurity Analyst, IT Support Analyst | 100% | Human review against that role’s published criteria and weights |
 
 Until a human completes the review the total shows *Pending human review*. Seeded sample scores show *Illustrative*. **No AI evaluation is implemented or claimed.**
 
@@ -54,7 +53,7 @@ npm test           # scoring unit tests
 npm run build      # static build in dist/ (deployable to GitHub Pages, Netlify, Vercel)
 ```
 
-**Suggested 2-minute demo:** Sign in as a graduate → Challenge → submit answers → Portfolio → add an entry → My application (*Pending human review*) → sign out → sign in as an employee → select a candidate → rate criteria and save → set status Shortlisted. Use *Reset demo data* in the footer to start over.
+**Suggested 2-minute demo:** Sign in as a graduate → Opportunities → choose a role → complete its challenge → My applications (*Pending human review*) → sign out → sign in as an employee → select a candidate and role-specific submission → rate criteria and save → set status Shortlisted. Use *Reset demo data* in the footer to start over.
 
 ## Project structure
 
@@ -72,8 +71,8 @@ The intervention targets one leverage point in the experience-gap cycle: the evi
 
 ## Known limitations
 
-- Single-browser demo: `localStorage` only, no real authentication, no shared data between users. The sign-in role and name are not verified; the "My application" name is typed.
-- Only the Junior Data Analyst role is interactive; the other four are catalogue examples.
+- Single-browser demo: `localStorage` only, no real authentication, no shared data between users. The sign-in role and name are not verified.
+- Challenges are text-only and use fictional scenarios. The Data Analyst is the only role with auto-checked answers; other role responses are fully human-reviewed.
 - Free-text answers are not auto-scored; they need human review (by design).
 - Portfolio entries cannot be verified and links are not checked.
 - Answer-key questions are fixed, so repeat candidates could share answers (future: varied scenarios).
@@ -82,4 +81,4 @@ The intervention targets one leverage point in the experience-gap cycle: the evi
 
 ## Future work
 
-Supabase auth and shared records, file uploads with size limits, more role workflows, reviewer-agreement tracking, accessibility audit, and a small pilot comparing standard CV screening with CV + structured skill evidence.
+Supabase auth and shared records, file uploads with size limits, reviewer-agreement tracking, accessibility audit, and a small pilot comparing standard CV screening with CV + structured skill evidence.

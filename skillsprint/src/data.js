@@ -4,14 +4,70 @@ export const COMPANY = { name: 'CapeData Analytics (fictional)' }
 export const ROLES = [
   { id: 'data-analyst', title: 'Junior Data Analyst', open: true, company: COMPANY.name, effort: '~45 minutes',
     summary: 'Analyse a small synthetic retail dataset, identify trends, describe two visualisations and recommend three actions.' },
-  { id: 'business-analyst', title: 'Business Analyst', open: false, company: 'Sample employer (fictional)', effort: 'Catalogue only',
-    summary: 'Map a process, identify a problem and propose requirements or improvements.' },
-  { id: 'developer', title: 'Software Developer', open: false, company: 'Sample employer (fictional)', effort: 'Catalogue only',
-    summary: 'Complete a small coding, debugging or code-reading task.' },
-  { id: 'cyber', title: 'Cybersecurity Analyst', open: false, company: 'Sample employer (fictional)', effort: 'Catalogue only',
-    summary: 'Assess a simulated security incident, prioritise risks and recommend defensive actions.' },
-  { id: 'it-support', title: 'IT Support Analyst', open: false, company: 'Sample employer (fictional)', effort: 'Catalogue only',
-    summary: 'Troubleshoot a simulated user/system issue and document a clear resolution.' },
+  { id: 'business-analyst', title: 'Business Analyst', open: true, company: 'BrightPath Commerce (fictional)', effort: '~45 minutes',
+    summary: 'Analyse a fictional order-approval process, identify a bottleneck and propose testable requirements.',
+    challenge: {
+      scenario: 'A fictional small retailer approves online orders manually. Staff copy order details into a spreadsheet, check stock by messaging the warehouse, then email customers. Approvals often take two days, and duplicate orders sometimes appear.',
+      prompts: [
+        { key: 'q1', label: 'Who are the key stakeholders, and what outcome should an improved process achieve?' },
+        { key: 'q2', label: 'Describe the current process and identify its main bottleneck or risk.' },
+        { key: 'q3', label: 'Propose two system or process requirements. Give each a measurable acceptance criterion.' },
+      ],
+      rubric: [
+        { key: 'task', label: 'Requirements and acceptance criteria', weight: 30, mode: 'Human review' },
+        { key: 'reasoning', label: 'Process analysis and problem definition', weight: 30, mode: 'Human review' },
+        { key: 'communication', label: 'Stakeholder and user focus', weight: 20, mode: 'Human review' },
+        { key: 'recommendations', label: 'Feasibility and prioritisation', weight: 20, mode: 'Human review' },
+      ],
+    } },
+  { id: 'developer', title: 'Software Developer', open: true, company: 'Copperleaf Software Studio (fictional)', effort: '~45 minutes',
+    summary: 'Design a small order-summary function, explain its edge cases and describe how you would test it.',
+    challenge: {
+      scenario: 'A fictional shop needs a function that receives a list of orders. Each order has an amount and a status. Return the number of completed orders and the total amount for completed orders only. You may answer in any programming language or clear pseudocode. Example: [{amount: 12, status: "complete"}, {amount: 8, status: "pending"}] should produce a count of 1 and a total of 12.',
+      prompts: [
+        { key: 'q1', label: 'Write the function or pseudocode that returns the completed-order count and total.' },
+        { key: 'q2', label: 'Describe at least three useful tests, including an empty list and an edge case.' },
+        { key: 'q3', label: 'Explain any assumptions you made and how you would keep the function readable and reliable.' },
+      ],
+      rubric: [
+        { key: 'implementation', label: 'Correctness and implementation approach', weight: 40, mode: 'Human review' },
+        { key: 'testing', label: 'Test coverage and edge cases', weight: 25, mode: 'Human review' },
+        { key: 'reasoning', label: 'Technical reasoning', weight: 20, mode: 'Human review' },
+        { key: 'communication', label: 'Clarity and maintainability', weight: 15, mode: 'Human review' },
+      ],
+    } },
+  { id: 'cyber', title: 'Cybersecurity Analyst', open: true, company: 'Sentinel Ridge Security (fictional)', effort: '~45 minutes',
+    summary: 'Triage a simulated suspicious-login alert and recommend safe containment and follow-up actions.',
+    challenge: {
+      scenario: 'In a fictional training environment, an employee reports an unexpected sign-in notification. The alert shows several failed sign-ins followed by one successful sign-in from an unfamiliar location. No other evidence is available yet. Treat this as a defensive tabletop exercise; do not access real systems.',
+      prompts: [
+        { key: 'q1', label: 'How would you assess and prioritise this alert? What would you verify first?' },
+        { key: 'q2', label: 'What immediate, proportionate containment steps would you recommend, and who should be involved?' },
+        { key: 'q3', label: 'What evidence would you preserve, and what follow-up or prevention steps would you propose?' },
+      ],
+      rubric: [
+        { key: 'triage', label: 'Alert triage and risk prioritisation', weight: 30, mode: 'Human review' },
+        { key: 'containment', label: 'Safe and proportionate containment', weight: 30, mode: 'Human review' },
+        { key: 'evidence', label: 'Evidence handling and follow-up', weight: 20, mode: 'Human review' },
+        { key: 'communication', label: 'Clear escalation and communication', weight: 20, mode: 'Human review' },
+      ],
+    } },
+  { id: 'it-support', title: 'IT Support Analyst', open: true, company: 'Harborlight IT Services (fictional)', effort: '~45 minutes',
+    summary: 'Troubleshoot a simulated shared-folder access problem and explain the resolution to a user.',
+    challenge: {
+      scenario: 'A fictional employee says they can no longer open the team shared folder after changing their password this morning. They can still sign in to their computer, and one colleague can access the folder. You are helping remotely and should avoid asking for the employee’s password.',
+      prompts: [
+        { key: 'q1', label: 'What clarifying questions would you ask, and what would you check first?' },
+        { key: 'q2', label: 'Give a safe, ordered troubleshooting plan. Explain how you would narrow down the cause.' },
+        { key: 'q3', label: 'Describe a likely resolution, how you would confirm it worked, and what you would tell the user.' },
+      ],
+      rubric: [
+        { key: 'diagnosis', label: 'Diagnostic questions and problem isolation', weight: 30, mode: 'Human review' },
+        { key: 'troubleshooting', label: 'Safe and systematic troubleshooting', weight: 30, mode: 'Human review' },
+        { key: 'resolution', label: 'Verification and resolution quality', weight: 25, mode: 'Human review' },
+        { key: 'communication', label: 'User-focused communication', weight: 15, mode: 'Human review' },
+      ],
+    } },
 ]
 
 export const REGIONS = ['North', 'South', 'West']
