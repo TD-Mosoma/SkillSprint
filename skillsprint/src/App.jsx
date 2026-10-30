@@ -405,7 +405,6 @@ function Employer({ state, setState }) {
             </select>
           </label>
         ))}
-        <button type="button" disabled={!complete} onClick={saveReview}>Save review</button>
       </fieldset>
       <h3>2. Portfolio evidence (separate signal)</h3>
       {cv ? <CVDownload cv={cv} /> : <p className="muted">No CV was attached to this submission.</p>}
@@ -415,6 +414,7 @@ function Employer({ state, setState }) {
         <select value={sub.status} onChange={(e) => update({ status: e.target.value })}>{STATUSES.map((s) => <option key={s}>{s}</option>)}</select>
       </label>
       <label>Reviewer notes<textarea rows="3" value={sub.notes} onChange={(e) => update({ notes: e.target.value })} /></label>
+      <button type="button" disabled={!complete} onClick={saveReview}>Save changes</button>
     </section>
   )
 }
@@ -474,7 +474,11 @@ export default function App() {
       <>
         <header>
           <h1>SkillSprint</h1><p>Show your skills. Earn your opportunity.</p>
-          <div className="session-bar theme-session-bar"><ThemeToggle theme={theme} onToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')} /></div>
+          <nav className="header-nav" aria-label="Appearance">
+            <div className="nav-actions">
+              <ThemeToggle theme={theme} onToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
+            </div>
+          </nav>
         </header>
         <Login onSignIn={signIn} />
       </>
@@ -486,12 +490,14 @@ export default function App() {
         <h1>SkillSprint</h1><p>Show your skills. Earn your opportunity.</p>
         <div className="session-bar">
           <span className="muted">{session.name} · {session.role === 'employee' ? 'Employee' : 'Graduate'}</span>
-          <div className="session-actions">
+        </div>
+        <nav className="header-nav" aria-label="Main">
+          {tabs.map(([k, l]) => <button key={k} className={view === k ? 'on' : ''} aria-current={view === k ? 'page' : undefined} onClick={() => k === 'challenge' ? openChallenge(selectedRoleId) : setView(k)}>{l}</button>)}
+          <div className="nav-actions">
             <ThemeToggle theme={theme} onToggle={() => setTheme(theme === 'dark' ? 'light' : 'dark')} />
             <button className="link" onClick={signOut}>Sign out</button>
           </div>
-        </div>
-        <nav aria-label="Main">{tabs.map(([k, l]) => <button key={k} className={view === k ? 'on' : ''} aria-current={view === k ? 'page' : undefined} onClick={() => k === 'challenge' ? openChallenge(selectedRoleId) : setView(k)}>{l}</button>)}</nav>
+        </nav>
       </header>
       <main>
         {session.role === 'graduate' && view === 'roles' && <Roles openChallenge={openChallenge} />}
