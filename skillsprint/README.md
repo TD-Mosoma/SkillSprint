@@ -16,16 +16,17 @@ The app is deployed on Vercel: [https://skillsprint-nine-rho.vercel.app](https:/
 - Start at the sign-in page and choose Graduate or Employee to open the corresponding workspace.
 - Sign-in is only a local demo flow; there are no passwords, real accounts, or server-side authentication.
 - Graduate and employee navigation is separated. All demo data remains in the current browser.
+- Switch between dark and light page backgrounds with the header control; the preference is saved in the current browser.
 
 **Graduate journey**
 1. Browse five entry-level IT roles, each with a matching image and fictional company: Business Analyst at BrightPath Commerce, Data Analyst at CapeData Analytics, Software Developer at Copperleaf Software Studio, Cybersecurity Analyst at Sentinel Ridge Security, and IT Support Analyst at Harborlight IT Services.
 2. Open a role-specific challenge with its scenario, task prompts and published review rubric: process analysis and requirements for Business Analysts, an order-summary function for Software Developers, suspicious-login alert triage for Cybersecurity Analysts, and shared-folder troubleshooting for IT Support Analysts.
 3. Submit written answers (client-side validation); Data Analyst answers are partly auto-checked, while the other roles are assessed by a human reviewer.
-4. Add **ProofOfSkill** portfolio entries (title, link, technologies, individual contribution) – always labelled *Self-reported*.
+4. Upload a PDF CV (maximum 5 MB) on the Portfolio page before starting a challenge, then optionally add **ProofOfSkill** entries (title, link, technologies, individual contribution) – always labelled *Self-reported*.
 5. Track application status and score.
 
 **Employer journey**
-1. Pick a candidate and role-specific submission; Data Analyst answers include auto-check results.
+1. Pick a candidate and role-specific submission; Data Analyst answers include auto-check results, and the attached CV can be downloaded.
 2. Rate the role-specific criteria (0–5) against the published rubric.
 3. View portfolio evidence **separately** from the challenge score.
 4. Set status (Under Review / Shortlisted / Interview / Not Progressing) and add notes. The platform never hires or rejects automatically.
@@ -42,7 +43,7 @@ Until a human completes the review the total shows *Pending human review*. Seede
 
 ## Technologies
 
-React 18 (JavaScript), Vite 5, plain CSS (responsive, light/dark), `localStorage` for persistence, Node's built-in test runner. No backend, no external APIs.
+React 18 (JavaScript), Vite 5, plain CSS (responsive, light/dark), `localStorage` and IndexedDB for browser-local persistence, Node's built-in test runner. No backend, no external APIs.
 
 ## Setup and run
 
@@ -71,11 +72,11 @@ src/styles.css       responsive styling, visible focus states
 
 ## Systems-thinking link
 
-The intervention targets one leverage point in the experience-gap cycle: the evidence used at early screening. Design choices that follow from the root-cause analysis: rubric visible before starting (trust), bounded ~45-minute task with text-only input (access and unpaid-work risk), challenge score kept separate from portfolio (avoids misleading precision), self-reported labels (portfolio exaggeration), human final decision (employer over-reliance).
+The intervention targets one leverage point in the experience-gap cycle: the evidence used at early screening. Design choices that follow from the root-cause analysis: expandable rubric available before submission (trust), bounded ~45-minute task with text-only input and a visible countdown (access and unpaid-work risk), challenge score kept separate from portfolio (avoids misleading precision), self-reported labels (portfolio exaggeration), human final decision (employer over-reliance).
 
 ## Known limitations
 
-- Single-browser demo: `localStorage` only, no real authentication, no shared data between users. The sign-in role and name are not verified.
+- Single-browser demo: `localStorage` and IndexedDB only, no real authentication, no shared data between users. The sign-in role and name are not verified; CVs are stored in the current browser.
 - Challenges are text-only and use fictional scenarios. The Data Analyst is the only role with auto-checked answers; other role responses are fully human-reviewed.
 - Free-text answers are not auto-scored; they need human review (by design).
 - Portfolio entries cannot be verified and links are not checked.

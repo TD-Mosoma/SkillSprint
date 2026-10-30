@@ -1,7 +1,9 @@
 /* SkillSprint – orange & black theme */
 :root {
-  --bg: #0a0a0a;
+  --bg: #000;
   --card: #151515;
+  --surface: #000;
+  --field: #000;
   --line: #2e2e2e;
   --fg: #f5f5f5;
   --muted: #a8a8a8;
@@ -11,15 +13,29 @@
   --error: #ff8a80;
   color-scheme: dark;
 }
+:root[data-theme="light"] {
+  --bg: #fff;
+  --card: #fff;
+  --surface: #fff;
+  --field: #fff;
+  --line: #d0d0d0;
+  --fg: #171717;
+  --muted: #666;
+  --error: #b42318;
+  color-scheme: light;
+}
 * { box-sizing: border-box }
-body { margin: 0; font: 16px/1.5 system-ui, sans-serif; background: var(--bg); color: var(--fg) }
+body { min-height: 100vh; margin: 0; font: 16px/1.5 system-ui, sans-serif; background: var(--bg); color: var(--fg) }
 a { color: var(--brand) }
 
-header { background: #000; border-bottom: 3px solid var(--brand); padding: 1rem 1rem 0 }
+header { background: var(--surface); border-bottom: 3px solid var(--brand); padding: 1rem 1rem 0 }
 header > * { max-width: 960px; margin-left: auto; margin-right: auto }
 header h1 { margin: 0; color: var(--brand); letter-spacing: .5px }
 header p { margin-top: 0; margin-bottom: .75rem; color: var(--muted) }
 .session-bar { max-width: 960px; margin: .5rem auto; display: flex; justify-content: space-between; align-items: center; gap: 1rem }
+.theme-session-bar { justify-content: flex-end }
+.session-actions { display: flex; align-items: center; gap: .75rem }
+.theme-toggle { white-space: nowrap }
 nav { display: flex; flex-wrap: wrap; gap: .4rem; padding-bottom: .75rem }
 nav button { background: transparent; color: var(--fg); border: 1px solid var(--line) }
 nav button:hover { border-color: var(--brand); color: var(--brand) }
@@ -39,6 +55,8 @@ h3 { border-left: 4px solid var(--brand); padding-left: .5rem }
 .card { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--brand); border-radius: 8px; padding: 1rem; margin: .5rem 0 }
 .card h3, .card h4 { margin-top: 0; border: 0; padding: 0; color: var(--fg) }
 .role-image { display: block; width: 100%; height: 160px; margin-bottom: 1rem; border-radius: 6px; object-fit: cover }
+:root[data-theme="light"] nav button.on { color: var(--on-brand) }
+:root[data-theme="light"] :focus-visible { outline-color: #171717 }
 .muted { color: var(--muted) }
 
 button { font: inherit; font-weight: 600; padding: .5rem .9rem; border-radius: 6px; border: 0; background: var(--brand); color: var(--on-brand); cursor: pointer }
@@ -48,16 +66,21 @@ button.link { background: none; color: var(--muted); font-weight: 400; text-deco
 :focus-visible { outline: 3px solid #fff; outline-offset: 2px }
 
 label { display: block; margin: .75rem 0 .25rem; font-weight: 600 }
-input, select, textarea { display: block; width: 100%; margin-top: .25rem; padding: .5rem; font: inherit; color: var(--fg); background: #000; border: 1px solid var(--line); border-radius: 6px }
+input, select, textarea { display: block; width: 100%; margin-top: .25rem; padding: .5rem; font: inherit; color: var(--fg); background: var(--field); border: 1px solid var(--line); border-radius: 6px }
 input:focus, select:focus, textarea:focus { border-color: var(--brand) }
 fieldset { border: 1px solid var(--line); border-radius: 8px; margin: 1rem 0 }
 legend { color: var(--brand); padding: 0 .4rem }
 .err { color: var(--error); font-size: .9rem; display: block }
 
 .scroll { overflow-x: auto }
+.challenge-timer { display: table; margin: 1rem 0; padding: .5rem .75rem; background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 6px; font-variant-numeric: tabular-nums; font-weight: 700 }
+.cv-upload { margin-bottom: 1.5rem }
+.rubric-disclosure { margin-top: 1.5rem }
+.rubric-disclosure summary { color: var(--brand); cursor: pointer; font-weight: 600 }
+.rubric-disclosure summary:focus-visible { outline: 3px solid currentColor; outline-offset: 3px }
 table { border-collapse: collapse; width: 100%; margin: 1rem 0; background: var(--card) }
 caption { text-align: left; font-weight: 600; padding: .25rem 0; color: var(--brand) }
-th { background: #000; color: var(--brand) }
+th { background: var(--surface); color: var(--brand) }
 th, td { border: 1px solid var(--line); padding: .4rem .6rem; text-align: left }
 
 .badge { font-size: .75rem; padding: .1rem .5rem; border-radius: 99px; font-weight: 700; white-space: nowrap }
